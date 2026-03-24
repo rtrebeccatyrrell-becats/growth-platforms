@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Growth Platforms Operating Model: a navigable system for platform-scale growth at Nu, by Rebecca Tyrrell.">
+<meta property="og:title" content="Growth Platforms Operating Model: Rebecca Tyrrell">
+<meta property="og:description" content="A navigable system for platform-scale growth at Nu: identity, experimentation, personalization, and market expansion.">
+<meta property="og:type" content="article">
+<title>Growth Platforms Operating Model: Rebecca Tyrrell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CSS CUSTOM PROPERTIES — DESIGN SYSTEM TOKENS
+   ============================================ */
+:root {
+  /* Colors — Primary */
+  --nu-purple: #820AD1;
+  --nu-purple-dark: #6B08AE;
+  --nu-purple-deep: #4C0677;
+  --nu-violet: #9333EA;
+  --nu-violet-mist: #F3E8FF;
+  --nu-white: #FFFFFF;
+  --nu-off-white: #F5F5F5;
+  --nu-black: #1A1A1A;
+  --nu-charcoal: #333333;
+
+  /* Colors — Neutral Scale */
+  --nu-gray: #6E6E6E;
+  --nu-gray-light: #767676;
+  --nu-gray-mist: #E8E8E8;
+
+  /* Typography Scale */
+  --text-display: 5rem;
+  --text-display-mobile: 3.5rem;
+  --text-h1: 2.25rem;
+  --text-h1-mobile: 1.75rem;
+  --text-h2: 1.5rem;
+  --text-h3: 1.25rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-micro: 0.75rem;
+
+  /* Spacing — 8px base grid */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* Layout */
+  --content-width: 720px;
+  --wide-width: 960px;
+  --hero-text-width: 540px;
+  --sidebar-width: 256px;
+
+  /* Borders */
+  --border-radius: 6px;
+  --border-radius-lg: 12px;
+
+  /* Font */
+  --font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--nu-charcoal);
+  background: var(--nu-white);
+}
+
+/* ============================================
+   SKIP LINK
+   ============================================ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-md);
+  z-index: 1000;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--nu-purple);
+  color: var(--nu-white);
+  font-size: var(--text-small);
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: var(--space-md);
+}
+
+/* ============================================
+   SIDEBAR
+   ============================================ */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  height: 100dvh;
+  background: var(--nu-white);
+  border-right: 1px solid var(--nu-gray-mist);
+  overflow-y: auto;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-logo {
+  padding: var(--space-xl) var(--space-xl) var(--space-2xl);
+}
+
+.sidebar-logo-text {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  color: var(--nu-purple);
+  line-height: 1.2;
+}
+
+.sidebar-logo-sub {
+  font-size: var(--text-micro);
+  color: var(--nu-gray);
+  margin-top: var(--space-xs);
+}
+
+.nav-group {
+  padding: 0 var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.nav-group-label {
+  font-size: var(--text-micro);
+  color: var(--nu-gray-light);
+  padding: 0 var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.nav-item {
+  display: block;
+  width: 100%;
+  font-size: var(--text-small);
+  font-weight: 400;
+  color: var(--nu-charcoal);
+  padding: var(--space-sm) var(--space-md);
+  border: 0;
+  border-left: 3px solid transparent;
+  border-radius: var(--border-radius);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  font-family: var(--font-family);
+  line-height: 1.4;
+}
+
+.nav-item:hover {
+  background: var(--nu-off-white);
+}
+
+.nav-item.active {
+  background: var(--nu-violet-mist);
+  font-weight: 600;
+  color: var(--nu-purple-dark);
+  border-left-color: var(--nu-purple);
+}
+
+.nav-item:focus-visible {
+  outline: 2px solid var(--nu-purple);
+  outline-offset: -2px;
+}
+
+/* ============================================
+   MOBILE NAV
+   ============================================ */
+.mobile-header {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: var(--nu-white);
+  border-bottom: 1px solid var(--nu-gray-mist);
+  z-index: 200;
+  align-items: center;
+  padding: 0 var(--space-md);
+}
+
+.hamburger {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--nu-charcoal);
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+.mobile-logo {
+  font-size: var(--text-body);
+  font-weight: 700;
+  color: var(--nu-purple);
+  margin-left: var(--space-md);
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 99;
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding: var(--space-2xl);
+  min-height: 100vh;
+}
+
+.content-container {
+  max-width: var(--content-width);
+}
+
+.wide-container {
+  max-width: var(--wide-width);
+}
+
+/* ============================================
+   PAGE TRANSITIONS
+   ============================================ */
+.page {
+  display: none;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page.active {
+  display: block;
+  animation: pageEntry 250ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes pageEntry {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.page-eyebrow {
+  font-size: var(--text-micro);
+  color: var(--nu-gray);
+  margin-bottom: var(--space-sm);
+}
+
+/* Page titles use --text-h1 size on both <h1> (overview) and <h2> (all other
+   pages). Intentional for SPA: each page's title is visually the largest
+   heading, while the semantic <h1> lives on the overview. */
+.page-title {
+  font-size: var(--text-h1);
+  font-weight: 700;
+  color: var(--nu-black);
+  line-height: 1.15;
+  margin-bottom: var(--space-md);
+}
+
+.page-accent-line {
+  width: 48px;
+  height: 2px;
+  background: var(--nu-purple);
+  margin-bottom: var(--space-4xl);
+}
+
+.section-title {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  color: var(--nu-black);
+  line-height: 1.3;
+  margin-bottom: var(--space-md);
+}
+
+.subsection-title {
+  font-size: var(--text-h3);
+  font-weight: 600;
+  color: var(--nu-black);
+  line-height: 1.3;
+  margin-bottom: var(--space-md);
+}
+
+/* Scoped max-width on paragraphs */
+.content-container p,
+.wide-container p {
+  margin-bottom: var(--space-lg);
+  max-width: var(--content-width);
+}
+
+.content-container p:last-child,
+.wide-container p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   BLOCK LABEL — SHARED BASE
+   All uppercase labels share weight, transform,
+   and standard letter-spacing (0.08em).
+   Only .north-star-label uses wider (0.12em).
+   ============================================ */
+.page-eyebrow,
+.card-eyebrow,
+.nav-group-label,
+.block-label,
+.phase-eyebrow,
+.layer-card-eyebrow,
+.metrics-tier-label,
+.tier-connector-label,
+.credentials-group-label,
+.indicator-card-connects,
+.metric-card-d-label,
+.sidebar-logo-sub {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.block-label {
+  font-size: var(--text-small);
+  margin-bottom: var(--space-md);
+  color: var(--nu-gray);
+}
+
+.block-label--violet {
+  color: var(--nu-violet);
+}
+
+/* ============================================
+   AI EVOLUTION BLOCK
+   ============================================ */
+.ai-block {
+  border-left: 3px solid var(--nu-violet);
+  padding-left: var(--space-lg);
+  margin: var(--space-2xl) 0;
+  max-width: var(--content-width);
+}
+
+.ai-block p + p {
+  margin-top: var(--space-md);
+}
+
+/* ============================================
+   CALLOUT BLOCK
+   ============================================ */
+.callout-block {
+  border-left: 3px solid var(--nu-purple);
+  background: var(--nu-violet-mist);
+  padding: var(--space-lg);
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  margin: var(--space-2xl) 0;
+}
+
+/* ============================================
+   VIGNETTE BLOCK (Overview)
+   ============================================ */
+.vignette-block {
+  background: var(--nu-off-white);
+  border-left: 3px solid var(--nu-purple);
+  padding: var(--space-xl);
+  margin: var(--space-2xl) 0;
+  max-width: var(--content-width);
+}
+
+.vignette-block p {
+  color: var(--nu-charcoal);
+  line-height: 1.65;
+}
+
+/* ============================================
+   CARDS — SHARED BASE
+   ============================================ */
+.card,
+.metric-card,
+.metric-card-d,
+.indicator-card,
+.layer-card {
+  border: 1px solid var(--nu-gray-mist);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+}
+
+.card,
+.metric-card,
+.metric-card-d,
+.indicator-card {
+  background: var(--nu-white);
+}
+
+/* ============================================
+   CARDS GRID
+   ============================================ */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: var(--space-lg);
+  max-width: var(--wide-width);
+  margin: var(--space-xl) 0;
+  list-style: none;
+  padding: 0;
+}
+
+.cards-grid li {
+  display: flex;
+}
+
+.card {
+  cursor: pointer;
+  transition: border-color 150ms ease;
+  font-family: var(--font-family);
+  font-size: var(--text-body);
+  text-align: left;
+  color: inherit;
+  line-height: inherit;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card:hover {
+  border-color: var(--nu-gray-light);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--nu-purple);
+  outline-offset: 2px;
+}
+
+.card-eyebrow {
+  font-size: var(--text-micro);
+  color: var(--nu-gray);
+  margin-bottom: var(--space-sm);
+}
+
+.card-title {
+  font-size: var(--text-h3);
+  font-weight: 600;
+  color: var(--nu-black);
+  line-height: 1.3;
+  margin-bottom: var(--space-sm);
+}
+
+.card-desc {
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--nu-charcoal);
+  line-height: 1.65;
+}
+
+/* ============================================
+   CHECKLIST
+   ============================================ */
+.checklist {
+  max-width: var(--content-width);
+  margin: var(--space-xl) 0;
+  list-style: none;
+  padding: 0;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.checklist-item::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  border: 1.5px solid var(--nu-gray-light);
+  border-radius: 3px;
+  margin-top: 4px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.checklist-text {
+  font-size: var(--text-body);
+  color: var(--nu-charcoal);
+  line-height: 1.65;
+}
+
+/* ============================================
+   PHASE HEADERS
+   ============================================ */
+.phase-header {
+  margin-bottom: var(--space-xl);
+}
+
+.phase-eyebrow {
+  font-size: var(--text-micro);
+  color: var(--nu-gray);
+  margin-bottom: var(--space-sm);
+}
+
+.phase-title {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  color: var(--nu-black);
+  line-height: 1.2;
+}
+
+.phase-subtitle {
+  font-size: var(--text-h3);
+  font-weight: 400;
+  color: var(--nu-charcoal);
+  margin-top: var(--space-sm);
+}
+
+/* ============================================
+   ABOUT PAGE
+   ============================================ */
+.about-lead {
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--nu-black);
+  line-height: 1.65;
+  margin-bottom: var(--space-lg);
+  max-width: var(--content-width);
+}
+
+.disclaimer {
+  font-size: var(--text-small);
+  color: var(--nu-gray);
+  font-style: italic;
+  margin-top: var(--space-3xl);
+  max-width: var(--content-width);
+}
+
+/* Utility classes */
+.mt-lg {
+  margin-top: var(--space-lg);
+}
+
+.mb-xl {
+  margin-bottom: var(--space-xl);
+}
+
+.layer-tagline {
+  font-style: italic;
+  color: var(--nu-gray);
+  margin-bottom: var(--space-lg);
+}
+
+/* ============================================
+   SECTION SPACING
+   ============================================ */
+.section-gap {
+  margin-top: var(--space-3xl);
+}
+
+/* ============================================
+   LIFECYCLE SVG
+   Colors inside the SVG use inline attributes
+   rather than CSS variables for renderer
+   compatibility. #A855F7 (original violet) is
+   retained for visual contrast with #820AD1.
+   #555555 (captions) provides strong readability hierarchy beneath bold loop labels.
+   ============================================ */
+.lifecycle-svg {
+  width: 100%;
+  max-width: var(--wide-width);
+  height: auto;
+  display: block;
+  margin: var(--space-lg) 0;
+}
+
+.lifecycle-mobile {
+  display: none;
+  margin: var(--space-lg) 0;
+}
+
+/* ============================================
+   NORTH STAR HERO (Metrics page)
+   ============================================ */
+.north-star-hero {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-xl);
+  margin: var(--space-xl) 0 var(--space-2xl);
+  max-width: var(--wide-width);
+  background: linear-gradient(135deg, var(--nu-purple-deep) 0%, var(--nu-purple) 50%, var(--nu-violet) 100%);
+  border-radius: var(--border-radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.north-star-hero .north-star-label {
+  font-size: var(--text-small);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: var(--space-md);
+}
+
+.north-star-hero .north-star-number {
+  font-size: var(--text-display);
+  font-weight: 700;
+  color: var(--nu-white);
+  line-height: 1;
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.02em;
+}
+
+.north-star-hero .north-star-context {
+  font-size: var(--text-body);
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+  max-width: var(--hero-text-width);
+  margin: 0 auto;
+}
+
+/* ============================================
+   LAYER CARDS (How It Scales page)
+   ============================================ */
+.layer-card {
+  margin-bottom: var(--space-lg);
+  max-width: var(--content-width);
+}
+
+.layer-card-eyebrow {
+  font-size: var(--text-micro);
+  color: var(--nu-purple);
+  margin-bottom: var(--space-xs);
+}
+
+.layer-card-title {
+  font-size: var(--text-h3);
+  font-weight: 600;
+  color: var(--nu-black);
+  margin-bottom: var(--space-md);
+}
+
+.layer-card p {
+  color: var(--nu-charcoal);
+  line-height: 1.65;
+  margin-bottom: var(--space-md);
+}
+
+.layer-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   PULL-QUOTE
+   ============================================ */
+.pull-quote {
+  font-size: var(--text-h3);
+  font-weight: 400;
+  color: var(--nu-black);
+  line-height: 1.5;
+  border-left: 3px solid var(--nu-purple);
+  padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+  margin: var(--space-2xl) 0;
+  max-width: var(--content-width);
+}
+
+/* ============================================
+   SECTION RULE
+   ============================================ */
+.section-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--nu-gray-mist);
+  margin: var(--space-3xl) 0;
+  border: none;
+}
+
+/* ============================================
+   METRICS DASHBOARD
+   ============================================ */
+.metrics-tier-label {
+  font-size: var(--text-micro);
+  color: var(--nu-gray-light);
+  margin-bottom: var(--space-md);
+}
+
+.metrics-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  max-width: var(--wide-width);
+  margin-bottom: var(--space-2xl);
+}
+
+.metric-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-xs);
+}
+
+.metric-card-name {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--nu-charcoal);
+}
+
+.metric-card-arrow {
+  font-size: var(--text-body);
+  font-weight: 700;
+  color: var(--nu-purple);
+}
+
+.metric-card-value {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  color: var(--nu-black);
+  line-height: 1.2;
+  margin-bottom: var(--space-xs);
+}
+
+.metric-card-context {
+  font-size: var(--text-small);
+  color: var(--nu-gray);
+  line-height: 1.5;
+}
+
+/* ============================================
+   INDICATOR CARDS (Tier 2 & 3)
+   ============================================ */
+.indicator-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  max-width: var(--wide-width);
+  margin-bottom: var(--space-2xl);
+}
+
+.indicator-card--t2 {
+  border-top: 3px solid var(--nu-violet);
+}
+
+.indicator-card--t3 {
+  border-top: 3px solid var(--nu-purple);
+}
+
+.indicator-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-sm);
+}
+
+.indicator-card-name {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--nu-black);
+}
+
+.indicator-card-arrow {
+  font-size: var(--text-body);
+  font-weight: 700;
+}
+
+.indicator-card--t2 .indicator-card-arrow {
+  color: var(--nu-violet);
+}
+
+.indicator-card--t3 .indicator-card-arrow {
+  color: var(--nu-purple);
+}
+
+.indicator-card-desc {
+  font-size: var(--text-small);
+  color: var(--nu-gray);
+  line-height: 1.5;
+}
+
+.indicator-card-connects {
+  font-size: var(--text-micro);
+  color: var(--nu-gray-light);
+  margin-top: var(--space-sm);
+}
+
+.indicator-cards--3col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ============================================
+   TIER CONNECTOR
+   ============================================ */
+.tier-connector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  max-width: var(--wide-width);
+  margin: var(--space-xl) 0;
+}
+
+.tier-connector-line {
+  flex: 1;
+  height: 1px;
+  background: var(--nu-gray-mist);
+}
+
+.tier-connector-label {
+  font-size: var(--text-micro);
+  color: var(--nu-gray-light);
+  white-space: nowrap;
+}
+
+/* ============================================
+   PROGRESSIVE SPACING
+   ============================================ */
+.section-gap-entry {
+  margin-top: var(--space-2xl);
+}
+
+.section-gap-closing {
+  margin-top: var(--space-2xl);
+}
+
+/* When a section-rule directly precedes section-gap-closing, the rule owns the gap */
+.section-rule + .section-gap-closing {
+  margin-top: 0;
+}
+
+/* ============================================
+   DISCIPLINE PAGE V2 — REDESIGNED BLOCKS
+   ============================================ */
+.scene-marker {
+  font-size: var(--text-h3);
+  font-style: italic;
+  color: var(--nu-gray);
+  margin-bottom: var(--space-md);
+  line-height: 1.4;
+  max-width: var(--content-width);
+}
+
+.story-block-v2 {
+  background: var(--nu-off-white);
+  border-left: 3px solid var(--nu-purple);
+  padding: var(--space-xl);
+  border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+  margin: var(--space-sm) 0 var(--space-2xl);
+  max-width: var(--content-width);
+}
+
+.story-block-v2 p {
+  color: var(--nu-charcoal);
+  line-height: 1.65;
+}
+
+.story-block-v2 p + p {
+  margin-top: var(--space-md);
+}
+
+.metric-cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin: var(--space-md) 0 var(--space-2xl);
+  max-width: var(--content-width);
+}
+
+.metric-card-d--growth {
+  border-top: 3px solid var(--nu-purple);
+}
+
+.metric-card-d--leading {
+  border-top: 3px solid var(--nu-violet);
+}
+
+.metric-card-d-label {
+  font-size: var(--text-micro);
+  margin-bottom: var(--space-sm);
+}
+
+.metric-card-d--growth .metric-card-d-label {
+  color: var(--nu-purple);
+}
+
+.metric-card-d--leading .metric-card-d-label {
+  color: var(--nu-violet);
+}
+
+.metric-card-d-headline {
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--nu-black);
+  line-height: 1.4;
+  margin-bottom: var(--space-xs);
+}
+
+.metric-card-d-detail {
+  font-size: var(--text-small);
+  color: var(--nu-gray);
+  line-height: 1.5;
+}
+
+/* ============================================
+   CREDENTIALS SECTION (About page)
+   ============================================ */
+.credentials-group {
+  margin-bottom: var(--space-xl);
+}
+
+.credentials-group-label {
+  font-size: var(--text-micro);
+  color: var(--nu-gray-light);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--nu-gray-mist);
+}
+
+.credential-item {
+  margin-bottom: var(--space-md);
+}
+
+.credential-title {
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--nu-black);
+  line-height: 1.4;
+}
+
+.credential-detail {
+  font-size: var(--text-small);
+  color: var(--nu-gray);
+  line-height: 1.5;
+}
+
+/* ============================================
+   RESPONSIVE — TABLET
+   ============================================ */
+@media (max-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================
+   RESPONSIVE — MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 200ms ease;
+    z-index: 300;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay.visible {
+    display: block;
+  }
+
+  .mobile-header {
+    display: flex;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: calc(56px + var(--space-xl)) var(--space-md) var(--space-xl);
+    scroll-padding-top: 72px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-title {
+    font-size: var(--text-h1-mobile);
+  }
+
+  .north-star-hero .north-star-number {
+    font-size: var(--text-display-mobile);
+  }
+
+  .metrics-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-cards-row {
+    grid-template-columns: 1fr;
+  }
+
+  .indicator-cards,
+  .indicator-cards--3col {
+    grid-template-columns: 1fr;
+  }
+
+  .scene-marker {
+    font-size: var(--text-body);
+  }
+
+  .lifecycle-svg {
+    display: none;
+  }
+
+  .lifecycle-mobile {
+    display: block;
+  }
+
+  .nav-item {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .page.active {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav-item,
+  .card,
+  .hamburger span {
+    transition: none;
+  }
+}
+
+/* ============================================
+   FORCED COLORS (Windows High Contrast)
+   ============================================ */
+@media (forced-colors: active) {
+  .page-accent-line {
+    background: CanvasText;
+  }
+
+  .nav-item.active {
+    border-left-color: Highlight;
+  }
+
+  .callout-block,
+  .ai-block,
+  .story-block-v2,
+  .vignette-block {
+    border-color: CanvasText;
+  }
+
+  .north-star-hero {
+    background: Canvas;
+    border: 2px solid CanvasText;
+    forced-color-adjust: none;
+  }
+
+  .north-star-hero .north-star-label,
+  .north-star-hero .north-star-number,
+  .north-star-hero .north-star-context {
+    color: CanvasText;
+  }
+
+  .indicator-card--t2,
+  .indicator-card--t3,
+  .metric-card-d--growth,
+  .metric-card-d--leading {
+    border-top-color: Highlight;
+  }
+
+  .checklist-item::before {
+    border-color: CanvasText;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  .sidebar, .mobile-header, .sidebar-overlay, .skip-link {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .page {
+    display: block !important;
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    page-break-before: always;
+  }
+
+  .page:first-child {
+    page-break-before: avoid;
+  }
+
+  body {
+    color: var(--nu-black);
+  }
+
+  .vignette-block,
+  .story-block-v2 {
+    background: var(--nu-white);
+    border-top: 1px solid var(--nu-gray-light);
+    border-left: none;
+  }
+
+  .metric-cards-row {
+    grid-template-columns: 1fr;
+  }
+
+  .indicator-cards,
+  .indicator-cards--3col {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics-cards,
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .north-star-hero {
+    background: var(--nu-white) !important;
+    border: 2px solid var(--nu-charcoal);
+  }
+
+  .north-star-hero .north-star-label {
+    color: var(--nu-gray) !important;
+  }
+
+  .north-star-hero .north-star-number {
+    color: var(--nu-black) !important;
+  }
+
+  .north-star-hero .north-star-context {
+    color: var(--nu-charcoal) !important;
+  }
+
+  .callout-block {
+    border-left-color: var(--nu-charcoal);
+    background: var(--nu-white);
+  }
+
+  .ai-block {
+    border-left-color: var(--nu-charcoal);
+  }
+
+  .page-accent-line {
+    background: var(--nu-charcoal);
+  }
+}
+
+/* ============================================
+   PASSWORD GATE
+   ============================================ */
+#password-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--nu-white);
+  font-family: var(--font-family);
+}
+
+#password-gate .gate-box {
+  text-align: center;
+  max-width: 360px;
+  width: 90%;
+}
+
+#password-gate .gate-title {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  color: var(--nu-purple);
+  margin-bottom: var(--space-xs);
+}
+
+#password-gate .gate-sub {
+  font-size: var(--text-small);
+  color: var(--nu-gray);
+  margin-bottom: var(--space-xl);
+}
+
+#password-gate input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: var(--text-body);
+  font-family: var(--font-family);
+  border: 1px solid var(--nu-gray-mist);
+  border-radius: var(--border-radius);
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+#password-gate input:focus {
+  border-color: var(--nu-purple);
+}
+
+#password-gate button {
+  width: 100%;
+  margin-top: var(--space-md);
+  padding: 12px;
+  font-size: var(--text-body);
+  font-weight: 600;
+  font-family: var(--font-family);
+  color: var(--nu-white);
+  background: var(--nu-purple);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+#password-gate button:hover {
+  background: var(--nu-purple-dark);
+}
+
+#password-gate .gate-error {
+  color: #D32F2F;
+  font-size: var(--text-small);
+  margin-top: var(--space-sm);
+  min-height: 20px;
+}
+
+#protected-content {
+  display: none;
+}
+
+#protected-content.unlocked {
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="password-gate">
+  <div class="gate-box">
+    <div class="gate-title">Growth Platforms</div>
+    <div class="gate-sub">Enter the password to continue</div>
+    <input type="password" id="gate-input" placeholder="Password" autocomplete="off" />
+    <button id="gate-btn">Continue</button>
+    <div class="gate-error" id="gate-error"></div>
+  </div>
+</div>
+
+<!-- PROTECTED CONTENT -->
+<div id="protected-content">
+
+<!-- Skip Link -->
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- ============================================
+     MOBILE HEADER
+     ============================================ -->
+<header class="mobile-header">
+  <button type="button" class="hamburger" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+  <span class="mobile-logo">nu</span>
+</header>
+<div class="sidebar-overlay" aria-hidden="true"></div>
+
+<!-- ============================================
+     SIDEBAR
+     ============================================ -->
+<nav class="sidebar" aria-label="Main navigation">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-text">nu</div>
+    <div class="sidebar-logo-sub">Growth Platforms · 2026</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Overview</div>
+    <button type="button" class="nav-item active" data-page="overview">Platform Overview</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Disciplines</div>
+    <button type="button" class="nav-item" data-page="d1">Identity &amp; Data</button>
+    <button type="button" class="nav-item" data-page="d2">Platform Enablement</button>
+    <button type="button" class="nav-item" data-page="d3">Customer Lifecycle</button>
+    <button type="button" class="nav-item" data-page="d4">Growth Experimentation</button>
+    <button type="button" class="nav-item" data-page="d5">Personalization Engine</button>
+    <button type="button" class="nav-item" data-page="d6">Market Expansion</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Framework</div>
+    <button type="button" class="nav-item" data-page="model">How the Platform Scales</button>
+    <button type="button" class="nav-item" data-page="metrics">How We'd Know It's Working</button>
+    <button type="button" class="nav-item" data-page="ninety">First 90 Days</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-label">Context</div>
+    <button type="button" class="nav-item" data-page="about">About Rebecca Tyrrell</button>
+  </div>
+</nav>
+
+<!-- ============================================
+     MAIN CONTENT
+     ============================================ -->
+<main class="main-content" id="main-content">
+
+<!-- =============================================
+     PAGE: PLATFORM OVERVIEW
+     ============================================= -->
+<section class="page active" id="page-overview">
+<div class="content-container">
+  <div class="page-eyebrow">Growth Platforms Operating Model</div>
+  <h1 class="page-title" tabindex="-1">Every interaction makes the next one smarter.</h1>
+  <div class="page-accent-line"></div>
+
+  <div class="vignette-block">
+    <p>Lucía lives in Mexico City. She's been denied credit by three traditional banks — no formal credit history, no paycheck from a recognized employer, no relationship with a branch manager. She has a job, a phone, and a thin file. She opens a Nu account in nine minutes. Within a week, the underwriting model, trained on thousands of behavioral signals beyond bureau scores, approves her for a credit card with a modest limit. She's one of the 46% of Nu Mexico customers who had never held a credit card before. She uses it carefully. Three months later, the system sees her payment consistency, her spending patterns, her engagement frequency. It increases her limit without her asking. Six months in, she opens a <span lang="es">Cajita</span> she names <span lang="es">"emergencias"</span> — a feature surfaced to her at the moment her balance pattern suggested she had money she wasn't deploying. At month nine, she's offered an investment product. Not because she fits a segment. Because her individual trajectory predicted she was ready. Her transactions have gone from four a month to nearly twenty. She uses less cash now. She told her sister about the app.</p>
+    <p class="mt-lg">Each step in that journey (the approval, the limit increase, the savings prompt, the investment offer) was powered by a different discipline. And each one made the next one smarter. That's not a funnel. That's a compounding loop.</p>
+  </div>
+
+</div>
+
+<div class="wide-container section-gap">
+  <h2 class="subsection-title">Growth at Nu isn't a funnel: it's compounding loops</h2>
+
+  <svg class="lifecycle-svg" viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three compounding growth loops at Nubank">
+    <defs>
+      <marker id="la" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="7" markerHeight="5" orient="auto">
+        <path d="M 0 0 L 8 3 L 0 6 z" fill="#820AD1"/>
+      </marker>
+      <marker id="lb" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="7" markerHeight="5" orient="auto">
+        <path d="M 0 0 L 8 3 L 0 6 z" fill="#A855F7"/>
+      </marker>
+      <marker id="lc" viewBox="0 0 8 6" refX="7" refY="3" markerWidth="7" markerHeight="5" orient="auto">
+        <path d="M 0 0 L 8 3 L 0 6 z" fill="#555555"/>
+      </marker>
+    </defs>
+    <g transform="translate(145, 90)">
+      <path d="M 0,-65 A 65,65 0 1,1 -46,-46" fill="none" stroke="#820AD1" stroke-width="2.5" marker-end="url(#la)"/>
+      <text x="0" y="-2" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="700" fill="#820AD1">Viral</text>
+      <text x="0" y="14" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="700" fill="#820AD1">Acquisition</text>
+    </g>
+    <text x="145" y="196" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#555555">NPS ~90 · CAC &lt;$5 · 80–90% word of mouth</text>
+    <line x1="218" y1="90" x2="350" y2="90" stroke="#E8E8E8" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#lc)"/>
+    <g transform="translate(430, 90)">
+      <path d="M 0,-65 A 65,65 0 1,1 -46,-46" fill="none" stroke="#A855F7" stroke-width="2.5" marker-end="url(#lb)"/>
+      <text x="0" y="-2" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="700" fill="#A855F7">Data</text>
+      <text x="0" y="14" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="700" fill="#A855F7">Flywheel</text>
+    </g>
+    <text x="430" y="196" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#555555">nuFormer · 86% monthly activity · 131M customers</text>
+    <line x1="503" y1="90" x2="635" y2="90" stroke="#E8E8E8" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#lc)"/>
+    <g transform="translate(715, 90)">
+      <path d="M 0,-65 A 65,65 0 1,1 -46,-46" fill="none" stroke="#820AD1" stroke-width="2.5" marker-end="url(#la)"/>
+      <text x="0" y="-2" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="700" fill="#820AD1">Product</text>
+      <text x="0" y="14" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="700" fill="#820AD1">Deepening</text>
+    </g>
+    <text x="715" y="196" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="10" fill="#555555">ARPAC $15 → ~$40 · each product deepens the next</text>
+  </svg>
+
+  <div class="lifecycle-mobile">
+    <div class="block-label">Viral Acquisition</div>
+    <p>NPS ~90 · CAC &lt;$5 · 80–90% word of mouth</p>
+    <div class="block-label mt-lg">Data Flywheel</div>
+    <p>nuFormer · 86% monthly activity · 131M customers</p>
+    <div class="block-label mt-lg">Product Deepening</div>
+    <p>ARPAC $15 → ~$40 · each product deepens the next</p>
+  </div>
+</div>
+
+<div class="content-container section-gap">
+  <h2 class="subsection-title">Six disciplines, each building on the last, make these loops work.</h2>
+</div>
+
+<div class="wide-container">
+  <ul class="cards-grid" role="list">
+    <li><button type="button" class="card" data-page="d1">
+      <div class="card-eyebrow">01 · Foundation</div>
+      <div class="card-title">Identity &amp; Data</div>
+      <div class="card-desc">Unified customer identity and the data architecture that makes every other discipline possible.</div>
+    </button></li>
+    <li><button type="button" class="card" data-page="d2">
+      <div class="card-eyebrow">02 · Enablement</div>
+      <div class="card-title">Platform Enablement</div>
+      <div class="card-desc">Shared services, APIs, and tooling that let product teams build without reinventing plumbing.</div>
+    </button></li>
+    <li><button type="button" class="card" data-page="d3">
+      <div class="card-eyebrow">03 · Business Logic</div>
+      <div class="card-title">Customer Lifecycle</div>
+      <div class="card-desc">The logic that governs how customers move from first touch to deep engagement to multi-product adoption.</div>
+    </button></li>
+    <li><button type="button" class="card" data-page="d4">
+      <div class="card-eyebrow">04 · Learning</div>
+      <div class="card-title">Growth Experimentation</div>
+      <div class="card-desc">The system that turns hypotheses into evidence and evidence into compounding product improvements.</div>
+    </button></li>
+    <li><button type="button" class="card" data-page="d5">
+      <div class="card-eyebrow">05 · Execution</div>
+      <div class="card-title">Personalization Engine</div>
+      <div class="card-desc">Real-time decisioning that delivers the right message, offer, and experience to each individual customer.</div>
+    </button></li>
+    <li><button type="button" class="card" data-page="d6">
+      <div class="card-eyebrow">06 · Proof</div>
+      <div class="card-title">Market Expansion</div>
+      <div class="card-desc">The playbook for entering and scaling in new markets without rebuilding the growth stack from scratch.</div>
+    </button></li>
+  </ul>
+</div>
+
+<div class="wide-container section-gap">
+  <div class="callout-block">
+    <div class="block-label">The tension I'd want to name early</div>
+    <p><strong>The platform must make the product smarter without making the organization slower.</strong></p>
+    <p>Nu's growth to 131M+ customers was built on product simplicity and organic acquisition. A great product that people told their friends about. The next phase requires something different: deepening revenue per customer through cross-sell, multi-product orchestration, and personalization at scale. That requires a growth platform. The challenge is building one that accelerates teams instead of adding the operational complexity that made the incumbents Nu disrupted slow in the first place.</p>
+    <p>This is the central design tension for this role. Every layer of infrastructure, every new decisioning system, every orchestration rule has to be weighed against the cost it imposes on the speed and simplicity that got Nu here. If building a world-class growth platform turns Nu into a company that needs a growth platform to function, we've failed. The platform should feel like a tailwind, not a dependency.</p>
+  </div>
+</div>
+</section>
+
+
+<!-- =============================================
+     PAGE: DISCIPLINE 1 — IDENTITY & DATA
+     ============================================= -->
+<section class="page" id="page-d1">
+<div class="content-container">
+  <div class="page-eyebrow">Foundation</div>
+  <h2 class="page-title" tabindex="-1">Identity &amp; Data</h2>
+  <div class="page-accent-line"></div>
+
+  <p>Identity is the foundation layer. Without a unified, real-time view of who each customer is, across products, markets, devices, and time, nothing else in this operating model works. The personalization engine can't personalize. The lifecycle logic can't sequence. The experimentation system can't attribute.</p>
+
+  <p>At Nu's scale, 131M+ customers across multiple countries, identity isn't a technical feature. It's an organizational commitment. It means every team that touches customer data agrees on a single source of truth, a single schema, a single set of privacy and consent rules. That's harder than building the technology. It's a governance problem dressed as a data problem.</p>
+
+  <p>The data architecture isn't about lakes or warehouses. It's about ensuring that a signal from one product is available, in real time and with the right permissions, to improve the next. A repayment pattern informs a savings recommendation. A claim updates a risk model. The data compounds.</p>
+
+  <div class="scene-marker">Colombia: Valentina's first session.</div>
+  <div class="story-block-v2">
+    <p>Valentina is mid-20s, lives in Bogotá, and heard about Nu from a Brazilian friend who couldn't stop talking about the purple card. She'd had a basic account at one of the big Colombian banks but found the experience frustrating — fees she didn't understand, an app that felt like it was designed in 2012. She downloads Nu. Within her first session, the onboarding flow adapts. Not based on a segment, but on real-time behavioral signals: how quickly she moves through screens, which features she explores first, whether her device and location suggest urban or rural context. Nu was the first credit card provider for 30% of its Colombian customers. Valentina is one of them. By her third day, the product surfaces a credit offer calibrated not just to her stated income, but to hundreds of behavioral features the identity graph has already assembled. When she contacts support, the agent sees the same customer — not a fragmented view from three different systems. When the growth team runs an experiment on onboarding, the results can be segmented by identity-level features that didn't exist two weeks ago, because the graph is continuously enriching.</p>
+    <p>When this breaks, it breaks quietly. Teams build their own customer views. Marketing has one, credit has another, support has a third. The signals conflict. The experiments overlap. A customer gets a savings prompt while simultaneously receiving a collections notice. It doesn't just waste effort. It destroys trust at the moment it matters most.</p>
+  </div>
+
+  <div class="block-label">How I'd measure this</div>
+  <div class="metric-cards-row">
+    <div class="metric-card-d metric-card-d--growth">
+      <div class="metric-card-d-label">Growth</div>
+      <div class="metric-card-d-headline">ARPAC: identity makes second-product adoption frictionless.</div>
+      <div class="metric-card-d-detail">A customer who feels known doesn't hesitate. Unified identity removes the friction between "I use one product" and "I trust you with a second."</div>
+    </div>
+    <div class="metric-card-d metric-card-d--leading">
+      <div class="metric-card-d-label">Leading</div>
+      <div class="metric-card-d-headline">Time-to-second-product: unified profiles vs. fragmented.</div>
+      <div class="metric-card-d-detail">If identity is working, customers with unified profiles adopt faster than those without.</div>
+    </div>
+  </div>
+
+  <div class="ai-block">
+    <div class="block-label block-label--violet">Where AI changes the shape of this work</div>
+    <p><strong>Identity today is a record system. Identity at full maturity is an intelligence layer.</strong></p>
+    <p>Most identity systems, even good ones, answer a backwards-looking question: who is this customer, and what have they done? AI shifts the question forward. Given everything the graph knows about this customer's trajectory, behavioral patterns, and cross-product signals, what are they likely to need in the next 72 hours? That's not a better version of identity resolution. It's a different capability entirely.</p>
+    <p>At Nu's scale, the compounding opportunity is cross-market intelligence. Behavioral patterns from 100 million customers in Brazil make the identity graph richer for 8 million customers in Mexico from day one. A customer archetype discovered in Colombia refines a credit model in Brazil. Every market enriches every other market's ability to understand who a customer is becoming, not just who they are.</p>
+    <p>The human judgment that remains is in governance. As the graph gets more predictive and more powerful, the decisions get harder: which inferences are acceptable for credit decisions vs. marketing. Where the confidence threshold sits between personalization and the cost of getting it wrong. How to manage the privacy surface as the graph learns things about customers they haven't explicitly shared. These are ethical, regulatory, and product decisions. Exactly the kind of judgment that gets more important as the system gets more capable.</p>
+  </div>
+</div>
+</section>
+
+<!-- =============================================
+     PAGE: DISCIPLINE 2 — PLATFORM INFRASTRUCTURE
+     ============================================= -->
+<section class="page" id="page-d2">
+<div class="content-container">
+  <div class="page-eyebrow">Enablement</div>
+  <h2 class="page-title" tabindex="-1">Platform Enablement</h2>
+  <div class="page-accent-line"></div>
+
+  <p>Platform infrastructure is the leverage layer. Every hour a product team spends rebuilding a notification service, an A/B testing framework, or a feature flag system is an hour not spent on the customer problem. The job of platform infrastructure is to make the right thing easy and the wrong thing hard.</p>
+
+  <p>For Nu, this means a set of shared services that product teams consume through well-documented APIs. Experimentation-as-a-service. Messaging-as-a-service. Feature management. Analytics pipelines. The infrastructure team doesn't own the customer experience. They own the tools that make the customer experience possible at scale.</p>
+
+  <p>The org design matters as much as the architecture. A team that builds in isolation creates tools nobody uses. A team that only takes requests becomes a bottleneck. The right model: a thin central team building foundational services, with embedded engineers who translate product teams' needs into platform capabilities.</p>
+
+  <div class="scene-marker">Brazil: a credit PM wants to run an experiment.</div>
+  <div class="story-block-v2">
+    <p>A product manager on the credit team wants to test whether showing a credit limit increase notification at the moment of a successful payment improves upgrade acceptance. Today, that requires coordinating with the messaging team, the experimentation team, and the analytics team: a two-week alignment process before any code is written. With the right platform infrastructure, she configures the experiment in a self-service UI, targets the segment using the shared identity layer, triggers the notification through the messaging service, and sees results in the shared analytics dashboard. From idea to live experiment in hours, not weeks. And when it works, the pattern is available to every other product team through the same infrastructure.</p>
+    <p>When this breaks, it's never capability. It's adoption. A feature flag service that only two teams use isn't a platform. It's a side project. If the platform team measures success by features shipped rather than features consumed, they'll build a beautiful system that collects dust.</p>
+  </div>
+
+  <div class="block-label">How I'd measure this</div>
+  <div class="metric-cards-row">
+    <div class="metric-card-d metric-card-d--growth">
+      <div class="metric-card-d-label">Growth</div>
+      <div class="metric-card-d-headline">Market expansion speed: the platform determines how fast new markets can grow independently.</div>
+      <div class="metric-card-d-detail">Are market teams growing faster on the platform than they were without it? If not, the platform is overhead.</div>
+    </div>
+    <div class="metric-card-d metric-card-d--leading">
+      <div class="metric-card-d-label">Leading</div>
+      <div class="metric-card-d-headline">Experiment velocity per market team.</div>
+      <div class="metric-card-d-detail">Teams that can test faster, grow faster. The platform's job is to remove the friction between hypothesis and result.</div>
+    </div>
+  </div>
+
+  <div class="ai-block">
+    <div class="block-label block-label--violet">Where AI changes the shape of this work</div>
+    <p><strong>The shift is from a platform the central team operates to one that market teams teach themselves.</strong></p>
+    <p>Today, platform adoption scales linearly with the central team's capacity to support it: onboarding calls, integration reviews, debugging sessions, documentation updates. AI breaks that linearity. Natural-language queries against platform capabilities replace support tickets. Auto-generated scaffolds for common integration patterns replace two-week onboarding cycles. The platform becomes self-documenting, self-onboarding, and self-debugging.</p>
+    <p>This changes the org design, not just the tooling. The platform team stops answering "how do I use this?" and starts designing the system that answers it autonomously. Their job shifts from operating the platform to governing its autonomy — deciding what the AI should scaffold, what it should refuse, and where a human review still matters. That's the same abstraction shift happening in every AI-native team: from producing work to defining the constraints that govern what AI produces.</p>
+  </div>
+</div>
+</section>
+
+<!-- =============================================
+     PAGE: DISCIPLINE 3 — CUSTOMER LIFECYCLE
+     ============================================= -->
+<section class="page" id="page-d3">
+<div class="content-container">
+  <div class="page-eyebrow">Business Logic</div>
+  <h2 class="page-title" tabindex="-1">Customer Lifecycle</h2>
+  <div class="page-accent-line"></div>
+
+  <p>This discipline owns the logic. Not touchpoints, but the rules governing how customers move between states. When is someone activated? What triggers multi-product transition? When has someone churned versus paused? These definitions sound academic until you realize every team at Nu makes decisions based on them, and different definitions mean different realities.</p>
+
+  <p>At Nu's scale, lifecycle management is a systems design problem. You can't manually orchestrate the journey of 100 million customers. You build the rules, the triggers, the feedback loops, and then the system executes. The discipline is in getting the rules right, monitoring them continuously, and evolving them as the product portfolio grows.</p>
+
+  <div class="scene-marker">Brazil: Carlos, eight months in, engagement declining.</div>
+  <div class="story-block-v2">
+    <p>Carlos is late 20s, middle income, and has been a Nu customer for eight months. He started with a credit card and NuConta. His spending is consistent, his payments are on time, but his engagement with the app has declined: fewer logins, shorter sessions. He has three <span lang="pt">Caixinhas</span> — <span lang="pt">"Emergência," "Celular Novo," "Viagem Bahia"</span> — and checks them less often. The lifecycle system detects this pattern not as "churn risk" but as "product ceiling." Carlos has extracted the value he can from a single product and hasn't been shown what's next. When NuInvest appears in his app, surfaced at the moment his <span lang="pt">Caixinhas</span> balance suggests he has money that could be working harder, it doesn't feel like a push. It feels like the product got smarter. He makes his first fixed-income investment without leaving the app. He'd never thought of himself as an investor — that was for rich people with private bank accounts. He's one of 36.2 million active investment customers, up 70% year over year.</p>
+    <p>When this breaks, it's because the lifecycle model treats stages as a funnel instead of a graph. Customers don't move linearly from awareness to monetization. They skip stages, regress, branch into multiple products simultaneously, or pause for months and return. A rigid funnel model misclassifies them and triggers the wrong interventions: a reactivation campaign sent to someone who's actually deepening engagement in a different product line.</p>
+  </div>
+
+  <div class="block-label">How I'd measure this</div>
+  <div class="metric-cards-row">
+    <div class="metric-card-d metric-card-d--growth">
+      <div class="metric-card-d-label">Growth</div>
+      <div class="metric-card-d-headline">ARPAC: lifecycle logic drives multi-product deepening, the $15 → $40 gap.</div>
+      <div class="metric-card-d-detail">Are newer cohorts deepening faster than older ones? That's the proof the system is learning, not just processing.</div>
+    </div>
+    <div class="metric-card-d metric-card-d--leading">
+      <div class="metric-card-d-label">Leading</div>
+      <div class="metric-card-d-headline">Second-product time compression.</div>
+      <div class="metric-card-d-detail">Is time-to-second-product shrinking cohort over cohort? That's the lifecycle system learning where the next offer should come.</div>
+    </div>
+  </div>
+
+  <div class="ai-block">
+    <div class="block-label block-label--violet">Where AI changes the shape of this work</div>
+    <p><strong>The shift is from defining lifecycle states to discovering them.</strong></p>
+    <p>ML models continuously discover customer states that analysts didn't anticipate: behavioral clusters that don't map to predefined lifecycle stages. A customer who looks like churn risk by traditional metrics but is actually consolidating before a major financial decision. A customer whose engagement pattern is seasonal, not declining. These are real states that a rules-based system can't see.</p>
+    <p>The human work shifts from defining states to validating them. Which discovered states are strategically meaningful? Which are noise? And as the model surfaces increasingly nuanced customer trajectories, the lifecycle team becomes the quality layer that decides which patterns the system should act on and which it should observe.</p>
+  </div>
+</div>
+</section>
+
+<!-- =============================================
+     PAGE: DISCIPLINE 4 — GROWTH EXPERIMENTATION
+     ============================================= -->
+<section class="page" id="page-d4">
+<div class="content-container">
+  <div class="page-eyebrow">Learning</div>
+  <h2 class="page-title" tabindex="-1">Growth Experimentation</h2>
+  <div class="page-accent-line"></div>
+
+  <p>Experimentation is the learning layer. Without a rigorous, high-velocity experimentation system, growth decisions are opinions. With one, they're evidence. The difference between a growth team that runs 10 experiments a month and one that runs 200 is not effort. It's infrastructure, culture, and the quality of the hypotheses going in.</p>
+
+  <p>At Nu's scale, experimentation has unique challenges. Statistical significance comes fast with 131M+ customers, but so do the risks. A bad experiment on a high-traffic surface can affect millions of people in minutes. The experimentation system needs guardrails as much as it needs velocity. Automated kill switches. Metric monitoring. Holdout groups that persist across experiments. And a results pipeline that doesn't just tell you whether something won, but why.</p>
+
+  <div class="scene-marker">A hypothesis, tested before lunch.</div>
+  <div class="story-block-v2">
+    <p>The growth team has a hypothesis: customers who receive a personalized credit limit increase notification within two hours of a large purchase are more likely to accept the increase than those who receive it at a scheduled time. Rather than debating this in a meeting, someone sets up the experiment before lunch. The shared experimentation platform handles randomization, holdout groups, and metric tracking. By the end of the week, the results are clear, and they're surprising. The personalized timing does improve acceptance, but only for customers in their first six months. For mature customers, scheduled notifications actually perform better. The insight isn't just about timing. It's about how customer relationship maturity changes the rules of engagement. That finding is logged, tagged, and available to every team running notification experiments.</p>
+    <p>When this breaks, it's not from bad experiments. It's from good experiments that get over-generalized. A test that works in Brazil's credit card portfolio gets copy-pasted to Mexico's insurance product without adjusting for market context, product maturity, or customer demographics. The result looks like a win for two weeks, then the retention numbers tell a different story. Experimentation without institutional memory creates an illusion of learning.</p>
+  </div>
+
+  <div class="block-label">How I'd measure this</div>
+  <div class="metric-cards-row">
+    <div class="metric-card-d metric-card-d--growth">
+      <div class="metric-card-d-label">Growth</div>
+      <div class="metric-card-d-headline">Customer scale: experimentation finds what converts before you scale it.</div>
+      <div class="metric-card-d-detail">What percentage of shipped growth improvements originated from experiments? If the answer is low, the team is shipping opinions.</div>
+    </div>
+    <div class="metric-card-d metric-card-d--leading">
+      <div class="metric-card-d-label">Leading</div>
+      <div class="metric-card-d-headline">Hypothesis-to-ship rate.</div>
+      <div class="metric-card-d-detail">Validated experiments that actually reach customers. High win rates with low ship rates means experimentation isn't connected to the roadmap.</div>
+    </div>
+  </div>
+
+  <div class="ai-block">
+    <div class="block-label block-label--violet">Where AI changes the shape of this work</div>
+    <p><strong>AI transforms experimentation from a manual discipline into a continuously learning system.</strong></p>
+    <p>AI assists across the experiment lifecycle: generating hypotheses from behavioral patterns, auto-sizing samples, flagging interaction effects with concurrent tests, and synthesizing results into themes. The experiment registry stops being a spreadsheet and becomes a knowledge graph that surfaces connections across hundreds of tests.</p>
+    <p>The human judgment that remains: when to kill a winning variant because it doesn't serve the long-term vision. When to override what the data says because the data can't see the strategic context. That's the difference between a team that optimizes and a team that learns.</p>
+  </div>
+</div>
+</section>
+
+<!-- =============================================
+     PAGE: DISCIPLINE 5 — PERSONALIZATION ENGINE
+     ============================================= -->
+<section class="page" id="page-d5">
+<div class="content-container">
+  <div class="page-eyebrow">Execution</div>
+  <h2 class="page-title" tabindex="-1">Personalization Engine</h2>
+  <div class="page-accent-line"></div>
+
+  <p>Personalization is the execution layer, where the intelligence generated by every other discipline becomes a customer experience. It's the real-time decisioning system that determines what each customer sees, when they see it, and through which channel. At scale, personalization isn't a feature. It's the product itself.</p>
+
+  <p>Personalization is not segmentation. Segmentation groups customers by shared traits. Personalization treats each customer as a market of one. At 131M+ customers, that gap is the difference between a good product and an unforgettable one.</p>
+
+  <p>The engine sits at the intersection of identity data, lifecycle state, experimentation results, and business rules. It makes thousands of decisions per second: which notification to send, which product to surface, which copy variant to display, which offer to make. Each decision generates data that feeds back into the system, making the next decision better.</p>
+
+  <div class="scene-marker">Same day, same time: Mariana and Fernando.</div>
+  <div class="story-block-v2">
+    <p>Mariana and Fernando open the Nu app at the same time on the same day. Mariana is in <span lang="pt">São Paulo</span>. She's been on Nu for two years — started with a Build Limit credit card, moved her salary over, has a <span lang="pt">Caixinha</span> named <span lang="pt">"apartamento."</span> She checks the app on payday. Today her balance spiked, she has a credit card payment due in three days, and her historical pattern shows she invests surplus income. Fernando is in Mexico City. Two months ago, he was one of the nearly 40% of Nu Mexico customers who'd been rejected by other financial institutions. He opened the app to check a transaction notification. He uses the credit card for groceries and transit. He hasn't explored what else the app does. Mariana sees a home screen that surfaces her credit card payment, an investment option pre-calculated to her available surplus, and a summary of last month's spending. Fernando sees a simplified home screen that highlights his most recent transactions, a gentle introduction to the <span lang="es">Cajitas</span> savings feature, and nothing about credit limits or investment. The system knows he isn't ready. Neither customer is aware that they're seeing a different product. Both feel like the app was designed for them.</p>
+    <p>Over-personalization is as dangerous as no personalization. When the engine optimizes too aggressively for short-term engagement metrics, it creates filter bubbles: customers who never see products they'd benefit from because the model hasn't observed interest signals yet. The engine also breaks when personalization and lifecycle logic aren't synchronized. A customer gets a perfectly targeted insurance offer while the lifecycle system has flagged them as at-risk for churn. The right message at the wrong moment is the wrong message.</p>
+  </div>
+
+  <div class="block-label">How I'd measure this</div>
+  <div class="metric-cards-row">
+    <div class="metric-card-d metric-card-d--growth">
+      <div class="metric-card-d-label">Growth</div>
+      <div class="metric-card-d-headline">NPS and organic acquisition: personalization drives loyalty, loyalty drives word of mouth.</div>
+      <div class="metric-card-d-detail">80–90% of new customers come from referrals. Protect and extend the 86% active rate. That's personalization's growth contribution.</div>
+    </div>
+    <div class="metric-card-d metric-card-d--leading">
+      <div class="metric-card-d-label">Leading</div>
+      <div class="metric-card-d-headline">Next-product offer acceptance rate.</div>
+      <div class="metric-card-d-detail">When we surface a recommendation, does the customer act on it? Low acceptance means the engine is optimizing for the model, not the customer.</div>
+    </div>
+  </div>
+
+  <div class="ai-block">
+    <div class="block-label block-label--violet">Where AI changes the shape of this work</div>
+    <p><strong>Personalization is where the distinction between "AI-assisted" and "AI-native" matters most.</strong></p>
+    <p>The current state at most companies, including most fintechs, is a hybrid: ML models handle scoring and ranking, while hand-crafted business rules handle orchestration. "Show the savings prompt if the customer has logged in 5+ times this week and hasn't opened a savings box." That's segmentation with extra steps.</p>
+    <p>The shift underway: reinforcement learning models that don't need predefined rules. They observe outcomes across millions of customer interactions and learn, continuously and in real time, which action, in which channel, at which moment, produces the best long-term result for each individual customer. Not "customers like this." This customer, right now.</p>
+    <p>This changes the team's job. Instead of designing rules, the team designs the objective function: what "best result" means. The easy objective (maximize next-click engagement) produces different behavior than the right one (maximize lifetime value while maintaining trust). The guardrail system, what the engine should never do even when the model says it would optimize the metric, becomes the team's most important product.</p>
+    <p>For Nu specifically, the stakes are higher than for a content platform. A badly optimized content feed wastes someone's time. A badly optimized credit offer can damage someone's financial health. The ethical surface of personalization in financial services is the discipline's defining design constraint.</p>
+  </div>
+</div>
+</section>
+
+<!-- =============================================
+     PAGE: DISCIPLINE 6 — MARKET EXPANSION
+     ============================================= -->
+<section class="page" id="page-d6">
+<div class="content-container">
+  <div class="page-eyebrow">Proof</div>
+  <h2 class="page-title" tabindex="-1">Market Expansion</h2>
+  <div class="page-accent-line"></div>
+
+  <p>Market expansion is the proof layer. It's where the platform thesis gets tested in the hardest possible way: does the system we built for one market actually work in another? Every framework, every abstraction, every "universal engine" claim gets pressure-tested when you try to serve customers whose language, regulations, financial behavior, and cultural expectations are fundamentally different.</p>
+
+  <p>Nu's expansion from Brazil to Mexico and Colombia is the defining case study. The question isn't whether the platform can be deployed in a new market. It's whether the intelligence generated in Brazil accelerates growth in Mexico, or whether each market starts from zero. If it's the former, the platform has real compounding value. If it's the latter, it's just a shared codebase. The three-layer model doesn't assume Latin American infrastructure. It's designed to work anywhere the platform goes.</p>
+
+  <div class="scene-marker">A new Latin American market: launch week.</div>
+  <div class="story-block-v2">
+    <p>Nu launches in a new Latin American market. The core banking product deploys on the shared platform. The team makes fifty configuration changes to adapt to local regulations, payment networks, and language — all through the config layer, no core engine changes. The onboarding flow uses global best practices as the starting point, with a local team running experiments on culturally specific elements: imagery, copy tone, feature ordering. The credit model starts conservative on global priors, then rapidly localizes. Within 90 days, personalization blends global intelligence with local learning. By month six, the product feels native. By month twelve, local learning feeds back into global models. Every market makes every other market smarter.</p>
+    <p>When this breaks, it's premature optimization. A team takes Brazil's most effective growth playbook and deploys it unchanged in Mexico, assuming that what worked for 90 million customers will work for 8 million. It doesn't, because the competitive landscape is different, the customer's relationship with financial institutions is different, and the regulatory environment creates different constraints. The platform helps by making adaptation fast. But the platform can't tell you what to adapt. That requires local market knowledge, customer research, and the humility to treat each market as a new learning environment.</p>
+  </div>
+
+  <div class="block-label">How I'd measure this</div>
+  <div class="metric-cards-row">
+    <div class="metric-card-d metric-card-d--growth">
+      <div class="metric-card-d-label">Growth</div>
+      <div class="metric-card-d-headline">Customer scale: new markets are the path to 1B.</div>
+      <div class="metric-card-d-detail">Time to local engagement depth at mature-market levels. If new-market customers reach Brazil-level engagement faster with each launch, the platform is compounding.</div>
+    </div>
+    <div class="metric-card-d metric-card-d--leading">
+      <div class="metric-card-d-label">Leading</div>
+      <div class="metric-card-d-headline">Global-to-local model lift.</div>
+      <div class="metric-card-d-detail">Does cross-market data produce better outcomes than starting cold? If yes, every market makes every other market smarter. If no, it's just shared infrastructure.</div>
+    </div>
+  </div>
+
+  <div class="ai-block">
+    <div class="block-label block-label--violet">Where AI changes the shape of this work</div>
+    <p><strong>AI collapses the sequential market entry process into a parallel one.</strong></p>
+    <p>The traditional model is linear: enter a market, run the playbook, measure results over months, adjust, learn. AI makes the learning concurrent with the launch. From day one, models are generating hypotheses from real-time behavioral data — not waiting for a quarter of results to accumulate. Regulatory scanning, competitive mapping, and culturally-aware localization happen in parallel with product deployment, not as prerequisites to it. The team doesn't finish research and then enter. They enter and the system researches continuously around them.</p>
+    <p>This changes the structure of a market entry team. Instead of a large upfront planning phase staffed by analysts, the team is smaller, moves faster, and relies on AI to surface what it needs to know as it needs to know it. The human judgment that remains is the highest-leverage kind: which markets to enter, in what sequence, at what risk tolerance, and — hardest of all — when the data from the last market is a useful prior versus a misleading assumption. AI processes the inputs. Humans make the bets.</p>
+  </div>
+</div>
+</section>
+
+<!-- =============================================
+     PAGE: THE MODEL
+     ============================================= -->
+<section class="page" id="page-model">
+<div class="content-container">
+  <div class="page-eyebrow">Framework</div>
+  <h2 class="page-title" tabindex="-1">How the Platform Scales</h2>
+  <div class="page-accent-line"></div>
+
+  <p>There's a meaningful difference between a platform that compounds and one that just gets deployed in multiple places. Most multi-market expansions produce the second kind — the same product copied and pasted, with local teams reinventing what headquarters already solved. The platform that actually compounds does something harder: it defines what stays the same, what adapts, and what must be learned fresh — and it keeps those boundaries honest over time.</p>
+
+  <p>That's the work of three layers.</p>
+
+  <div class="section-gap-entry">
+    <div class="layer-card">
+      <div class="layer-card-eyebrow">Layer 1</div>
+      <div class="layer-card-title">Universal Engine</div>
+      <p>What stays the same everywhere. The core product architecture, identity system, experimentation platform, data pipelines, personalization decisioning. These represent years of accumulated engineering and product intelligence. They don't change per market. They're the reason a new market can launch in weeks rather than years.</p>
+      <p>The universal engine isn't just code — it's organizational knowledge embedded in code. Credit risk models encoding thousands of experiments. Lifecycle logic refined across 100 million customers. Rewriting any of this per market would be like a restaurant chain redesigning its kitchen for every new location.</p>
+      <p><strong>What goes wrong when you violate it:</strong> A local team forks the engine to solve a market-specific problem. Now you have two codebases. The fork doesn't get the next round of platform improvements. Within a quarter, the local version is worse than what it replaced — and the platform team is spending cycles on reconciliation instead of compounding.</p>
+    </div>
+
+    <div class="layer-card">
+      <div class="layer-card-eyebrow">Layer 2</div>
+      <div class="layer-card-title">Market Adaptation</div>
+      <p>What adapts through configuration, not code. Regulatory requirements. Payment networks. Language. Currency and tax logic. Product parameters. These vary by market but should be expressible through feature flags, parameter tables, and content management — not engineering changes to the core.</p>
+      <p>The discipline here is deciding what belongs in config versus what requires code changes. Every time a market-specific requirement triggers a code change to the universal engine, the platform's scalability degrades. The goal is to expand the config surface continuously — turning yesterday's engineering ticket into tomorrow's dropdown.</p>
+      <p><strong>What goes wrong when you violate it:</strong> A requirement that should live in config gets hardcoded into the engine. Now every subsequent market that needs a different value has to file an engineering request, wait for a release cycle, and risk regression. One hardcoded assumption becomes a bottleneck across every market simultaneously.</p>
+    </div>
+
+    <div class="layer-card">
+      <div class="layer-card-eyebrow">Layer 3</div>
+      <div class="layer-card-title">Local Learning</div>
+      <p>What must be discovered in each market. Acquisition channels that work. Growth loops that compound. Cultural patterns in financial behavior. Competitive responses. Partnership ecosystems. This layer can't be configured from headquarters — it has to be learned by teams in the market.</p>
+      <p>The platform's job isn't to eliminate local learning — it's to make learning fast. Shared experimentation infrastructure means local teams can start testing on day one. Shared analytics means an insight discovered in Colombia is visible to the team launching in the Philippines. Shared identity means every local interaction enriches global models. The platform accelerates the learning that no amount of configuration can replace.</p>
+      <p><strong>What goes wrong when you violate it:</strong> Headquarters assumes it already knows what works and pushes a growth playbook that performed well in Brazil. The local team runs it unchanged. It underperforms. Six months pass before anyone questions the playbook instead of the execution. The platform substituted assumption for learning, which is the one thing it should never do.</p>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+
+  <div class="section-gap-closing">
+    <h2 class="section-title">How the Boundaries Self-Correct</h2>
+    <p class="layer-tagline">The three layers aren't architecture decisions you make once. They're a living boundary that shifts based on evidence.</p>
+    <p>A growth tactic discovered in Mexico — say, a referral mechanic tied to bill-splitting — proves universal across every market where it's tested. It migrates from local learning into the market adaptation layer, then into the engine itself as a first-class referral primitive. Meanwhile, a credit decisioning parameter that was assumed to be universal turns out to behave differently in markets with informal economies. It moves from the engine down to market adaptation, where local teams can tune it.</p>
+    <p>This migration is the platform's metabolism. Ideas flow upward as they prove generalizable. Assumptions flow downward as they prove context-dependent. The team that manages this platform must be obsessively attentive to these shifts. Every quarterly review should ask three questions: What's in the wrong layer? What should move up? What should move down?</p>
+    <p>This is the governance mechanism that prevents the platform from calcifying — where "universal" actually means universal and "local" actually means local, verified by data rather than assumed by org chart.</p>
+    <p>The same architecture that expands across markets expands across verticals. New verticals get configured, not rebuilt. But only if the boundaries keep moving.</p>
+  </div>
+
+  <div class="callout-block section-gap">
+    <div class="block-label">Worked Example</div>
+    <p><strong>Loyalty programs — a decomposition test.</strong></p>
+    <p>A cross-product loyalty program is a useful test because it touches all three layers and the boundaries aren't obvious.</p>
+    <p><strong>Universal Engine:</strong> Points earning and redemption infrastructure. Balance tracking. Tier calculation logic. These are the same everywhere because the underlying mechanics don't vary by market — a point is a point, a tier is a tier, a redemption is a redemption.</p>
+    <p><strong>Market Adaptation:</strong> Points-per-real vs. points-per-peso conversion rates. Tier thresholds, which may vary by market maturity. Partner redemption catalogs. Tax treatment of points. These vary by market but don't require code changes — they're parameters, not architecture.</p>
+    <p><strong>Local Learning:</strong> Which loyalty incentives actually drive the behaviors we want. Whether a tier upgrade drives more engagement in Colombia than a cashback offer. Whether customers in Mexico respond more to experiential rewards than financial ones. Whether loyalty even matters as a retention lever in a market where switching costs are already high. These can only be discovered through experimentation.</p>
+    <p>If you can decompose a new feature this cleanly, the platform is working. If every new feature requires code changes to the engine, the layer boundaries need rearchitecting.</p>
+  </div>
+
+  <div class="section-gap">
+    <div class="pull-quote">A growth platform's value isn't in the technology — it's in the rate at which the technology learns.</div>
+    <p>Every experiment, every customer interaction, every market entry generates intelligence that makes the entire system better. The platform that learns fastest wins, regardless of where it started. The Growth Platforms team doesn't build products. It builds the conditions under which products build themselves.</p>
+  </div>
+</div>
+</section>
+
+<!-- =============================================
+     PAGE: METRICS
+     ============================================= -->
+<section class="page" id="page-metrics">
+<div class="content-container">
+  <div class="page-eyebrow">Measurement</div>
+  <h2 class="page-title" tabindex="-1">How We'd Know It's Working</h2>
+  <div class="page-accent-line"></div>
+
+  <p>By the time a board metric moves, the decisions that caused it are months old. These metrics are structured to show whether the platform is working before the outcomes prove it.</p>
+</div>
+
+<div class="wide-container">
+  <div class="north-star-hero">
+    <div class="north-star-label">Five-Year North Star</div>
+    <div class="north-star-number">1B</div>
+    <div class="north-star-context">Every metric below exists to answer one question: is the platform accelerating the path to a billion customers?</div>
+  </div>
+</div>
+
+<div class="wide-container section-gap">
+  <div class="metrics-tier-label">Tier 1 · Company Growth Metrics</div>
+  <div class="metrics-cards">
+    <div class="metric-card">
+      <div class="metric-card-header">
+        <div class="metric-card-name">Customer Scale</div>
+        <div class="metric-card-arrow">↑</div>
+      </div>
+      <div class="metric-card-value">131M+</div>
+      <div class="metric-card-context">Active customers across Brazil, Mexico, Colombia, and soon the US. The number the platform exists to grow.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-card-header">
+        <div class="metric-card-name">NPS &amp; Preference</div>
+        <div class="metric-card-arrow">↑</div>
+      </div>
+      <div class="metric-card-value">~90</div>
+      <div class="metric-card-context">Growth that erodes NPS isn't growth — it's borrowing from the future.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-card-header">
+        <div class="metric-card-name">ARPAC</div>
+        <div class="metric-card-arrow">↑</div>
+      </div>
+      <div class="metric-card-value">$15 → ~$40</div>
+      <div class="metric-card-context">The gap between Nu and incumbents. Closed by cross-sell and deepening, not by fees.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-card-header">
+        <div class="metric-card-name">Monthly Active Rate</div>
+        <div class="metric-card-arrow">↑</div>
+      </div>
+      <div class="metric-card-value">86%</div>
+      <div class="metric-card-context">Brazil baseline. Must be maintained and replicated as the platform scales across markets.</div>
+    </div>
+  </div>
+</div>
+
+<div class="wide-container">
+  <div class="tier-connector">
+    <div class="tier-connector-line"></div>
+    <div class="tier-connector-label">driven by</div>
+    <div class="tier-connector-line"></div>
+  </div>
+</div>
+
+<div class="wide-container">
+  <div class="section-gap-closing">
+    <div class="metrics-tier-label">Tier 2 · Growth Levers This Role Controls</div>
+    <p class="mb-xl">If these move, Tier 1 follows. Nu's own cohort data proves the mechanism: mature customer cohorts generate ARPAC above $25, while the average is $15. The difference is multi-product adoption depth. Each product a customer adds makes the next one more likely and more valuable. The platform's job is to compress that maturation curve — making newer cohorts deepen faster than earlier ones did.</p>
+    <div class="indicator-cards">
+      <div class="indicator-card indicator-card--t2">
+        <div class="indicator-card-header">
+          <div class="indicator-card-name">Multi-product adoption by cohort</div>
+          <div class="indicator-card-arrow">↑</div>
+        </div>
+        <div class="indicator-card-desc">Are newer cohorts deepening faster than earlier ones?</div>
+        <div class="indicator-card-connects">Drives ARPAC</div>
+      </div>
+      <div class="indicator-card indicator-card--t2">
+        <div class="indicator-card-header">
+          <div class="indicator-card-name">Second-product time compression</div>
+          <div class="indicator-card-arrow">↓</div>
+        </div>
+        <div class="indicator-card-desc">Time-to-second-product shrinking cohort over cohort.</div>
+        <div class="indicator-card-connects">Drives ARPAC</div>
+      </div>
+      <div class="indicator-card indicator-card--t2">
+        <div class="indicator-card-header">
+          <div class="indicator-card-name">Experiment velocity per market</div>
+          <div class="indicator-card-arrow">↑</div>
+        </div>
+        <div class="indicator-card-desc">Teams that test faster, grow faster.</div>
+        <div class="indicator-card-connects">Drives Customer Scale</div>
+      </div>
+      <div class="indicator-card indicator-card--t2">
+        <div class="indicator-card-header">
+          <div class="indicator-card-name">Offer acceptance rate</div>
+          <div class="indicator-card-arrow">↑</div>
+        </div>
+        <div class="indicator-card-desc">When we surface a recommendation, does the customer act?</div>
+        <div class="indicator-card-connects">Drives NPS + ARPAC</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wide-container">
+  <div class="tier-connector">
+    <div class="tier-connector-line"></div>
+    <div class="tier-connector-label">enabled by</div>
+    <div class="tier-connector-line"></div>
+  </div>
+</div>
+
+<div class="wide-container">
+  <div class="section-gap-closing">
+    <div class="metrics-tier-label">Tier 3 · Platform Health</div>
+    <p class="mb-xl">Is the platform earning adoption? If these are healthy, Tier 2 can move. If they aren't, it can't.</p>
+    <div class="indicator-cards indicator-cards--3col">
+      <div class="indicator-card indicator-card--t3">
+        <div class="indicator-card-header">
+          <div class="indicator-card-name">Voluntary adoption rate</div>
+          <div class="indicator-card-arrow">↑</div>
+        </div>
+        <div class="indicator-card-desc">Market teams choosing the platform because it helps, not because it's mandated.</div>
+      </div>
+      <div class="indicator-card indicator-card--t3">
+        <div class="indicator-card-header">
+          <div class="indicator-card-name">Self-service rate</div>
+          <div class="indicator-card-arrow">↑</div>
+        </div>
+        <div class="indicator-card-desc">Platform operations completed without filing a ticket.</div>
+      </div>
+      <div class="indicator-card indicator-card--t3">
+        <div class="indicator-card-header">
+          <div class="indicator-card-name">Config coverage</div>
+          <div class="indicator-card-arrow">↑</div>
+        </div>
+        <div class="indicator-card-desc">Market adaptations handled through configuration, not code changes.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- =============================================
+     PAGE: FIRST 90 DAYS
+     ============================================= -->
+<section class="page" id="page-ninety">
+<div class="content-container">
+  <div class="page-eyebrow">Plan</div>
+  <h2 class="page-title" tabindex="-1">First 90 Days</h2>
+  <div class="page-accent-line"></div>
+
+  <p>Every decision in this plan is tested against one question: <strong>do market teams choose to build on Growth Platforms — or do they work around it?</strong></p>
+
+  <!-- Phase 1 -->
+  <div class="section-gap-entry">
+    <div class="phase-header">
+      <div class="phase-eyebrow">Phase 1</div>
+      <div class="phase-title">Days 1–30</div>
+      <div class="phase-subtitle">Orient and Diagnose</div>
+    </div>
+
+    <p><strong>Listen before building anything.</strong> Not reading decks in a conference room. Go to the markets. Walk the product as a customer. Sit with the people who build workarounds because the platform doesn't do what they need.</p>
+
+    <p><strong>Weeks 1–2: Deep listening.</strong> One-on-ones with every growth lead across Brazil, Mexico, and Colombia. Sit with the ICs who build the features, run the experiments, debug the pipelines. Ask the same three questions everywhere: What's the hardest part of your job that shouldn't be? What would you build if you had three months of uninterrupted time? What did we ship last quarter that you wish we hadn't? Map the current architecture from conversations, not documentation. Documentation tells you what the system was designed to do. Conversations tell you what it actually does.</p>
+
+    <p><strong>Weeks 3–4: Mapping.</strong> Capability audit across all six disciplines. Experimentation posture: how many tests are running, what's the pre-registration rate, how long from hypothesis to result. Team mapping: who owns what, where the seams are, where workarounds live. AI/ML baseline: current state of nuFormer integration, Hyperplane capabilities, and the team's readiness for the abstraction shift. The key question: is the current structure bottlenecked because the platform team is too thick (trying to own execution that should be market-level) or too thin (market teams building workarounds because the platform doesn't give them enough)?</p>
+
+    <p>A note on this document's six-discipline framework: it's a starting hypothesis, not a commitment. The framework gives me a place to start listening. What I hear determines what stays.</p>
+
+    <div class="callout-block">
+      <div class="block-label">Gate</div>
+      <p>Problem map, not a solution document. Workarounds triaged: absorb, codify, or leave alone. The inventory is co-created with the teams that built them — some workarounds should stay.</p>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="section-gap">
+    <div class="phase-header">
+      <div class="phase-eyebrow">Phase 2</div>
+      <div class="phase-title">Days 31–60</div>
+      <div class="phase-subtitle">Form a Point of View</div>
+    </div>
+
+    <p><strong>Weeks 5–6: Foundation document.</strong> Four pages, not a deck. User problems, platform principles, business opportunity, constraints, and an AI sequencing recommendation — experimentation infrastructure first (fast feedback loops, contained stakes, clear measurement), personalization second. It goes to the CDO and CTO as a proposal, not a presentation.</p>
+
+    <p><strong>Weeks 7–8: Coalition and governance.</strong> Draw the line between what the platform team owns and what market teams own. Make it explicit, written, and agreed — not assumed. Voluntary adoption rate as the success metric. One concrete commitment: a 48-hour SLA on platform team response to market team requests. Teams that feel heard don't build workarounds.</p>
+
+    <div class="callout-block">
+      <div class="block-label">Gate</div>
+      <p>Operating model proposal shared with CDO. Open scope questions resolved before day 60.</p>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="section-gap">
+    <div class="phase-header">
+      <div class="phase-eyebrow">Phase 3</div>
+      <div class="phase-title">Days 61–90</div>
+      <div class="phase-subtitle">Commit and Ship</div>
+    </div>
+
+    <p><strong>Weeks 9–10: First win.</strong> Ship something a market lead can point to and say "that's what the platform team did for us." Not a strategy artifact — a capability, a tool, a fix. The magnitude doesn't matter. The credibility does.</p>
+
+    <p><strong>Weeks 11–13: Commit.</strong> Roadmap with owners and hard commitments — names next to deliverables with dates. Org and capability design recommendation. US pre-work begins: identity schema for SSN/ITIN, regulatory mapping for CFPB and OCC, credit bureau integration scoping. The platform work for US launch can't wait for the roadmap to be finalized.</p>
+
+    <div class="callout-block">
+      <div class="block-label">Gate</div>
+      <p>Written 90-day readout shared before the meeting: what I learned, what I changed my mind about, what I'm committing to, and what I need from you.</p>
+    </div>
+  </div>
+
+  <!-- Day 90 Deliverables -->
+  <hr class="section-rule">
+  <div class="section-gap-closing">
+    <h2 class="section-title">Day 90 Deliverables</h2>
+    <ul class="checklist" role="list">
+      <li class="checklist-item">
+        <div class="checklist-text"><strong>Foundation document.</strong> Four-page operating model proposal with AI sequencing recommendation.</div>
+      </li>
+      <li class="checklist-item">
+        <div class="checklist-text"><strong>Governance model.</strong> Platform team vs. market team ownership — explicit, written, agreed — with 48-hour response SLA.</div>
+      </li>
+      <li class="checklist-item">
+        <div class="checklist-text"><strong>Committed roadmap with org design.</strong> Names, dates, capability structure, US pre-work scoped.</div>
+      </li>
+      <li class="checklist-item">
+        <div class="checklist-text"><strong>One shipped win.</strong> Credibility before strategy.</div>
+      </li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- =============================================
+     PAGE: ABOUT REBECCA TYRRELL
+     ============================================= -->
+<section class="page" id="page-about">
+<div class="content-container">
+  <div class="page-eyebrow">Context</div>
+  <h2 class="page-title" tabindex="-1">About Rebecca Tyrrell</h2>
+  <div class="page-accent-line"></div>
+
+  <p class="about-lead">The through-line isn't platform architecture. It's who the platform serves. My career, my board work, and the problems I've chosen all point the same direction: building systems that include people instead of excluding them.</p>
+
+  <p>I serve on the board of Junior Achievement of Southeastern Pennsylvania. JA SEPA is part of a national network that reaches 4.8 million students a year. But the work happens locally because the needs are local. Our chapter reaches roughly 25,000 students per year in under-resourced communities: financial literacy, career readiness, entrepreneurship. The network provides the infrastructure. The local chapter knows what the community actually needs. Their guiding belief: "futures should be determined by choice, not chance." That's the same sentence applied to 131 million adults Nu serves today. The students JA serves are the same people Nu serves: young, often first-generation, navigating a system that wasn't built for them. Nu's mission is that belief at a scale no one has attempted.</p>
+
+  <p>I have worked across the full customer lifecycle. The frontline. The channel. The experience. The platform underneath.</p>
+
+  <p>At MBNA, I worked the call center. Account opening. Underwriting. Customer assistance. When you are that close to the system, you learn something specific: the frontline tools often have to compensate for what the customer cannot do themselves and should be able to. Every handoff is a design decision, whether anyone designed it or not. Most had not been designed.</p>
+
+  <p>At Bank of America, I ran new acquisitions across the credit card portfolio. Direct mail, e-commerce, telesales. The scale was achieved through massive operations: designers building copy and art, Excel sheets driving every campaign. Then the credit crisis forced a different question: credit quality and data intelligence versus carpet-bombing volume.</p>
+
+  <p>At Sallie Mae, I experienced the full arc. I started as the business originations lead (what would now be called the product owner), building the Smart Option student loan product. I ran the Test Center of Excellence for the entire technology portfolio (and really, testing for the customer). From there I moved into the technology platforms to modernize so we could move faster, and eventually owned the digital experiences: dotcom, application, consumer portal, app. Rebuilding each with UX and digital product management. That's how I got into martech. We could not scale personalization through creative and UX alone. We didn't have the data intelligence to activate against.</p>
+
+  <p>At Comcast, the same gap at a larger scale. Fragmentation at the channel level and fragmentation within channels. Four email service providers. Over twenty independent CMS operators. Unassisted versus assisted. Marketing versus service. Channel by channel, but only one customer. I have been building a new platform model that brings together AI/ML models, unified identity and data, the creative and content supply chain, unified decisioning and personalization across surfaces, and measurement in a feedback loop. AI infused at every layer of the go-to-market ecosystem.</p>
+
+  <p>I build platforms for the people who use them. I have been those people. I know what it feels like when something is missing.</p>
+
+  <div class="section-gap">
+    <div class="credentials-group">
+      <div class="credentials-group-label">Experience</div>
+      <div class="credential-item">
+        <div class="credential-title">Vice President, Consumer Growth Product Engineering</div>
+        <div class="credential-detail">Comcast · 2022–Present</div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-title">Vice President, Head of Digital Experience &amp; MarTech</div>
+        <div class="credential-detail">Sallie Mae · 2019–2022</div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-title">Vice President, Consumer Platform &amp; Engineering</div>
+        <div class="credential-detail">Sallie Mae · 2018–2019</div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-title">Senior Director</div>
+        <div class="credential-detail">Sallie Mae · 2009–2017</div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-title">Vice President</div>
+        <div class="credential-detail">Bank of America (MBNA) · 2003–2009</div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-title">Corporal</div>
+        <div class="credential-detail">Army National Guard – Delaware / U.S. Army Reserve · 1999–2005</div>
+      </div>
+    </div>
+
+    <div class="credentials-group">
+      <div class="credentials-group-label">Board &amp; Affiliations</div>
+      <div class="credential-item">
+        <div class="credential-title">Board of Directors</div>
+        <div class="credential-detail">Junior Achievement of Southeastern Pennsylvania</div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-title">Board of Directors</div>
+        <div class="credential-detail">The WICT Network Greater Philadelphia</div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-title">Management Department Advisory Council</div>
+        <div class="credential-detail">Drexel University</div>
+      </div>
+      <div class="credential-item">
+        <div class="credential-title">BMLI Class 50 Graduate</div>
+        <div class="credential-detail">Betsy Magness Leadership Institute</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout-block section-gap">
+    <div class="block-label">How I built this</div>
+    <p>This document was built from the outside, using AI to synthesize hundreds of public sources — earnings transcripts, investor presentations, press coverage, published interviews — and then to challenge every framework, metric, and assumption against the role and Nu's stated vision. I'm not a visual designer or a coder, but I had a point of view a slide deck couldn't carry. AI gave me access to a medium I couldn't have reached on my own. I built custom instruction sets that calibrate how the AI reviews work: voice and tone standards, design system criteria, a strategic review lens that acts as a bar raiser. The AI doesn't just help once. It compounds, the same way a platform should. This is how I work now. It's how I'd work at Nu.</p>
+    <p class="disclaimer">Built from publicly available information: earnings reports, press releases, investor presentations, and published interviews.</p>
+  </div>
+</div>
+</section>
+
+</main>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+(function() {
+  // Defensive checks
+  var navItems = document.querySelectorAll('.nav-item');
+  var pages = document.querySelectorAll('.page');
+  var mainContent = document.querySelector('.main-content');
+  var sidebar = document.querySelector('.sidebar');
+  var overlay = document.querySelector('.sidebar-overlay');
+  var hamburger = document.querySelector('.hamburger');
+
+  if (!mainContent || !sidebar || !overlay) return;
+
+  function navigateTo(pageId) {
+    // Deactivate all pages — strip animation to allow restart
+    pages.forEach(function(page) {
+      page.classList.remove('active');
+      page.style.animation = 'none';
+    });
+
+    // Deactivate all nav items
+    navItems.forEach(function(item) {
+      item.classList.remove('active');
+    });
+
+    // Activate target page with clean animation restart
+    var targetPage = document.getElementById('page-' + pageId);
+    if (targetPage) {
+      void targetPage.offsetWidth;
+      targetPage.style.animation = '';
+      targetPage.classList.add('active');
+
+      // Move focus to the page heading for screen reader announcement
+      var heading = targetPage.querySelector('.page-title');
+      if (heading) heading.focus();
+    }
+
+    // Activate corresponding nav item(s)
+    navItems.forEach(function(item) {
+      if (item.getAttribute('data-page') === pageId) {
+        item.classList.add('active');
+      }
+    });
+
+    // Scroll to top
+    mainContent.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Always close mobile sidebar
+    closeSidebar();
+  }
+
+  // Sidebar nav click handlers
+  navItems.forEach(function(item) {
+    item.addEventListener('click', function() {
+      var pageId = this.getAttribute('data-page');
+      if (pageId) navigateTo(pageId);
+    });
+  });
+
+  // Card navigation — uses data-page attribute, no inline handlers
+  var cardButtons = document.querySelectorAll('.card[data-page]');
+  cardButtons.forEach(function(card) {
+    card.addEventListener('click', function() {
+      var pageId = this.getAttribute('data-page');
+      if (pageId) navigateTo(pageId);
+    });
+  });
+
+  // Mobile sidebar — overlay always closes, never toggles
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebar.setAttribute('aria-hidden', 'true');
+    overlay.classList.remove('visible');
+  }
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    sidebar.removeAttribute('aria-hidden');
+    overlay.classList.add('visible');
+  }
+
+  function toggleSidebar() {
+    if (sidebar.classList.contains('open')) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  }
+
+  if (hamburger) {
+    hamburger.addEventListener('click', toggleSidebar);
+  }
+
+  overlay.addEventListener('click', closeSidebar);
+
+  // Escape key closes mobile sidebar and returns focus to hamburger
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+      closeSidebar();
+      if (hamburger) hamburger.focus();
+    }
+  });
+})();
+</script>
+
+</div><!-- end #protected-content -->
+
+<script>
+(function() {
+  // ========== CHANGE YOUR PASSWORD HERE ==========
+  var PASSWORD = 'nubank2026';
+  // ===============================================
+
+  var gate = document.getElementById('password-gate');
+  var input = document.getElementById('gate-input');
+  var btn = document.getElementById('gate-btn');
+  var error = document.getElementById('gate-error');
+  var content = document.getElementById('protected-content');
+
+  function unlock() {
+    if (input.value === PASSWORD) {
+      gate.style.display = 'none';
+      content.classList.add('unlocked');
+    } else {
+      error.textContent = 'Incorrect password. Please try again.';
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  btn.addEventListener('click', unlock);
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') unlock();
+  });
+  input.focus();
+})();
+</script>
+</body>
+</html>
